@@ -350,7 +350,7 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             var appendToBodyVal = scope.$eval(attrs[prefix + 'AppendToBody']);
             appendToBody = angular.isDefined(appendToBodyVal) ? appendToBodyVal : appendToBody;
 
-            var containerVal = scope.$eval(attrs[prefix + 'container']);
+            var containerVal = scope.$eval(attrs[prefix + 'Container']);
             container = angular.isDefined(containerVal) ? containerVal : container;
 
             // if a tooltip is attached to <body> we need to remove it on
