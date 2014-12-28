@@ -142,6 +142,7 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             var hasEnableExp = angular.isDefined(attrs[prefix+'Enable']);
             var ttScope = scope.$new();
             var autoClose = angular.isDefined(attrs[prefix+'AutoClose']);
+            var hasIsOpen = angular.isDefined(attrs[prefix+'IsOpen']);
             var $body = angular.element($window.document);
 
             var positionTooltip = function () {
@@ -232,6 +233,11 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
               ttScope.isOpen = true;
               ttScope.$digest(); // digest required as $apply is not called
 
+              // Update parent scope if it has an isOpen attr
+              if(hasIsOpen) {
+                scope[attrs[prefix+'IsOpen']] = true;
+              }
+
               $timeout(function() {
                 if(autoClose && triggers.show === 'click') {
                   $body.bind('click.ui-bootstrap.tooltip', hideTooltipBind);
@@ -247,6 +253,11 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             function hide() {
               // First things first: we don't show it anymore.
               ttScope.isOpen = false;
+
+              // Update parent scope if it has an isOpen attr
+              if(hasIsOpen) {
+                scope[attrs[prefix+'IsOpen']] = false;
+              }
 
               if(autoClose && triggers.show === 'click') {
                 $body.unbind('click.ui-bootstrap.tooltip', hideTooltipBind);
