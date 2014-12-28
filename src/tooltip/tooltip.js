@@ -16,7 +16,8 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
     animation: true,
     popupDelay: 0,
     autoClose: false,
-    container: 'self'
+    container: 'self',
+    customClass: ''
   };
 
   // Default hide triggers for each show trigger
@@ -290,6 +291,7 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
 
             function prepareTooltip() {
               prepPlacement();
+              prepCustomClass();
               prepPopupDelay();
             }
 
@@ -311,6 +313,11 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             function prepPlacement() {
               var val = attrs[ prefix + 'Placement' ];
               ttScope.placement = angular.isDefined( val ) ? val : options.placement;
+            }
+
+            function prepCustomClass() {
+              var val = attrs[ prefix + 'CustomClass' ];
+              ttScope.customClass = angular.isDefined( val ) ? val : options.customClass;
             }
 
             function prepPopupDelay() {
